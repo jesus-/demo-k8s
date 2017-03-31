@@ -11,6 +11,9 @@ Fork this repo and change it.
 # View which k8s cluster connected with
 kubectl config current-context 
 
+# Edit `name` in demo-k8s-namespace.yml and Create your namespace
+kubectrl apply -f demo-k8s-namespace.yml
+
 # If u want use your namespace rather than default
 kubectl config set-context $(kubectl config current-context) --namespace=<your namespace>
 
@@ -59,4 +62,13 @@ gcloud docker -- push gcr.io/<your-project-id>/demo-k8s
 # you need to set the different tag to the image, otherwise it wont update
 
 kubectl set image deployment/demo-k8s demo-k8s=gcr.io/<your-project-id>/demo-k8s
+```
+
+### 4. Scale
+```
+# Scale UP
+kubectl scale deployment demo-k8s --replicas 10
+
+# Scale Down
+kubectl scale deployment demo-k8s --replicas 1
 ```
