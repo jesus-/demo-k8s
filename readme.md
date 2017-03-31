@@ -13,13 +13,13 @@ Fork this repo and change it.
 kubectl config current-context 
 
 # Edit `name` in demo-k8s-namespace.yml and Create your namespace
-kubectrl apply -f demo-k8s-namespace.yml
+kubectrl create -f demo-k8s-namespace.yml
 
 # If u want use your namespace rather than default
 kubectl config set-context $(kubectl config current-context) --namespace=<your namespace>
 
 # Deploy to K8s
-kubectrl apply -f demo-k8s.yml
+kubectrl create -f demo-k8s.yml --record
 ```
 
 ## Intro
@@ -49,17 +49,17 @@ docker run -p 8080:8080 -ti --rm demo-k8s
 ### 2. Push to the registry 
 
 ```
-# Add the tag to your image:
-docker tag demo-k8s gcr.io/<your-project-id>/demo-k8s
+# Add the `TAG` to your image
+docker tag demo-k8s gcr.io/<your-project-id>/demo-k8s:TAG
 
 # Use the gcloud command-line tool to push the image to the Google Container Engine Registry:
-gcloud docker -- push gcr.io/<your-project-id>/demo-k8s
+gcloud docker -- push gcr.io/<your-project-id>/demo-k8s:TAG
 ```
 
 ### 3. Deploy application
 ```
 # Skip if you already run it in `Get Started`
-kubectrl apply -f demo-k8s.yml
+kubectrl create -f demo-k8s.yml --record
 ```
 
 ### 4. Access application
