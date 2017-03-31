@@ -1,6 +1,7 @@
 # demo-k8s
 
 # Before Start
+* Install `gcloud` sdk
 * Install `Docker`
 * Install `kubectrl`
 * Install `minikube` if you want to run in local
@@ -55,16 +56,32 @@ docker tag demo-k8s gcr.io/<your-project-id>/demo-k8s
 gcloud docker -- push gcr.io/<your-project-id>/demo-k8s
 ```
 
-
-### 3. Update application
+### 3. Deploy application
 ```
+# Skip if you already run it in `Get Started`
+kubectrl apply -f demo-k8s.yml
+```
+
+### 4. Access application
+ ```
+ kubectl get service
+# you will get follow result 80:30819/TCP, go http://<k8s-cluster>:30819/
+# NAME               CLUSTER-IP    EXTERNAL-IP   PORT(S)        AGE
+# demo-k8s-service   10.3.252.42   <nodes>       80:30819/TCP   57m
+ ```
+
+
+### 5. Update application
+```
+# Change some code and repeat step `1` and `2` again
+
 # Here are two `demo-k8s`, one is metadata.name and one is spec.template.spec.containers in the `Deployment`.
 # you need to set the different tag to the image, otherwise it wont update
 
 kubectl set image deployment/demo-k8s demo-k8s=gcr.io/<your-project-id>/demo-k8s
 ```
 
-### 4. Scale
+### 6. Scale
 ```
 # Scale UP
 kubectl scale deployment demo-k8s --replicas 10
@@ -72,3 +89,4 @@ kubectl scale deployment demo-k8s --replicas 10
 # Scale Down
 kubectl scale deployment demo-k8s --replicas 1
 ```
+
