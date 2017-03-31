@@ -1,0 +1,7 @@
+# Create a k8s namespace for isolate env
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: demo-k8s
+  labels:
+    name: demo-k8s

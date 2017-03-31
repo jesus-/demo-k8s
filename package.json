@@ -1,0 +1,8 @@
+{
+  "name": "demo-k8s",
+  "version": "1.0.0",
+  "description": "This repo is provide minimal hand-on experience to k8s",
+  "main": "index.js",
+  "author": "Eric Ng",
+  "license": "MIT"
+}

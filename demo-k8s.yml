@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: aftership-secrets
+type: Opaque
+data:
+  NPM_TOKEN: 
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: aftership-config
+data:
+  config: |
+        'use strict';
+        module.exports = {
+           
+        };
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-k8s-service
+  labels:
+    app: demo-k8s
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: demo-k8s
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: demo-k8s
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: demo-k8s
+    spec:
+      containers:
+      - name: demo-k8s
+        image: gcr.io/aftership-hackathon/demo-k8s
+        ports:
+        - containerPort: 8080
