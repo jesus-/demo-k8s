@@ -3,7 +3,7 @@
 # Before Start
 * Install `gcloud` sdk
 * Install `Docker`
-* Install `kubectrl`
+* Install `kubectl`
 * Install `minikube` if you want to run in local
 
 ## Get Started
@@ -13,13 +13,13 @@ Fork this repo and change it.
 kubectl config current-context 
 
 # Edit `name` in demo-k8s-namespace.yml and Create your namespace
-kubectrl create -f demo-k8s-namespace.yml
+kubectl create -f demo-k8s-namespace.yml
 
 # If u want use your namespace rather than default
 kubectl config set-context $(kubectl config current-context) --namespace=<your namespace>
 
 # Deploy to K8s
-kubectrl create -f demo-k8s.yml --record
+kubectl create -f demo-k8s.yml --record
 ```
 
 ## Intro
@@ -59,7 +59,7 @@ gcloud docker -- push gcr.io/<your-project-id>/demo-k8s:TAG
 ### 3. Deploy application
 ```
 # Skip if you already run it in `Get Started`
-kubectrl create -f demo-k8s.yml --record
+kubectl create -f demo-k8s.yml --record
 ```
 
 ### 4. Access application
